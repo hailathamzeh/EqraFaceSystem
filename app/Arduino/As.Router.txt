@@ -1,0 +1,53 @@
+
+#include <ESP8266WebServer.h>
+
+const char* ssid = "fobeid.Arduino";
+const char* password = "12345678";
+
+#define relay D5
+
+ESP8266WebServer server(80);
+    void handleRoot() {
+
+                    server.send(200, "text/plain","READY");
+                      }
+                      
+    void handleOn() {
+                     digitalWrite(relay,HIGH);
+                    server.send(200, "text/plain","DONE");
+                      }
+                      
+    void handleOff() {
+                     digitalWrite(relay,LOW);
+                    server.send(200, "text/plain","DONE");
+                     }
+
+void setup() {
+  Serial.begin(115200);
+
+  WiFi.disconnect();
+  WiFi.softAP(ssid, password);
+  WiFi.setOutputPower(20.5);
+
+
+
+ 
+
+  pinMode(relay,OUTPUT);   
+    
+
+  digitalWrite(relay,LOW);
+
+  server.on("/", handleRoot);
+  server.on("/on",handleOn);  
+  server.on("/of",handleOff);
+  server.begin();
+  Serial.println(ssid);
+  IPAddress myIP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(myIP); 
+  }
+ 
+void loop() {
+  server.handleClient();
+  }

@@ -1,0 +1,85 @@
+-- ## README by FaisalObeid :: com.fobeid@gmail.com :: 00962799599100
+############################
+## Install mysql client, server and the jdbc connector, either via synaptic or by using the following
+## https://help.ubuntu.com/community/JDBCAndMySQL
+$ sudo apt-get install mysql-server
+$ sudo apt-get install mysql-client
+$ sudo apt-get install libmysql-java
+$ service mysql status
+$ sudo timedatectl set-timezone Asia/Amman # Update Time Zone
+############################
+#### Create new user inside database:
+$ mysql -u root -p -h localhost #fobeid # 127.0.0.1 
+$ DROP USER 'IPCam'@'%';
+$ CREATE USER 'IPCam'@'%' IDENTIFIED BY 'XcCRy0m8es';
+$ GRANT ALL PRIVILEGES ON *.* to 'IPCam'@'%';
+$ FLUSH PRIVILEGES;
+$ CREATE DATABASE IPCam DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;
+$ exit
+############################
+#### Create database:
+$ echo "CREATE DATABASE IPCam DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;" | mysql -u IPCam -h localhost -p --default-character-set=utf8 ## XcCRy0m8es
+###########################
+############################
+#### Public mysql
+$ sudo ufw allow 3306
+$ sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+
+## bind-address            = 127.0.0.1
+bind-address            = 0.0.0.0
+
+$ sudo /etc/init.d/mysql restart
+$ telnet serverIP 3306
+$ mysql -u fobeid -p -h localhost ## 00100
+###########################
+sudo systemctl restart mysql
+sudo /etc/init.d/mysql restart
+sudo systemctl status mysql
+############################
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `logs`;
+DROP TABLE IF EXISTS `users`;
+
+############################
+-- --------------------------------------------------------
+-- DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `key` varchar(50) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `details` varchar(100) COLLATE utf8_unicode_ci,
+  `gender` enum('male','female','other') NOT NULL DEFAULT 'other',
+  `age` int(3),
+  `skinColor` varchar(25) COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+############################
+-- --------------------------------------------------------
+-- DROP TABLE IF EXISTS `logs`;
+CREATE TABLE IF NOT EXISTS `logs` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `key` varchar(50) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `name` varchar(50) COLLATE utf8_unicode_ci,
+  `path` LONGTEXT COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+############################
+-- --------------------------------------------------------
+-- DROP TABLE IF EXISTS `cams`;
+CREATE TABLE IF NOT EXISTS `cams` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  
+  `ip` varchar(15) NOT NULL,
+  `port` int(8) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `details` varchar(100),
+
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
