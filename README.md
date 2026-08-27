@@ -166,22 +166,6 @@ These paths are intentionally excluded from version control. The repository is r
 
 See [docs/PRIVACY.md](docs/PRIVACY.md) before working with real-person data.
 
-## Publish this folder to GitHub
-
-Extract the ZIP, open the `EqraFaceSystem` folder in VS Code, and publish it before adding any private images or a real `.env` file.
-
-```bash
-git init -b main
-git status --short
-git add -- .
-git status --short
-git commit -m "Publish privacy-safe Eqra Face System"
-git remote add origin https://github.com/YOUR_USERNAME/EqraFaceSystem.git
-git push -u origin main
-```
-
-Review the second `git status --short` output before committing. It must not include face images, databases, encodings, credentials, logs, installers, or local output files. You can also use VS Code's Source Control panel and the **Publish Branch** action after `git init` and the first commit.
-
 ## Attribution and license
 
 The original source contains an Eqra Tech Company all-rights-reserved notice, which has been retained. No separate open-source license is included in this repository. Confirm that you have the necessary rights before redistributing or relicensing the code.
