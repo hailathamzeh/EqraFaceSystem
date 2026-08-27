@@ -1,0 +1,3 @@
+path,name,details,gender,age,skinColor
+data/private/person_001.jpg,Person One,Example record,female,28,
+data/private/person_002.jpg,Person Two,Example record,male,31,

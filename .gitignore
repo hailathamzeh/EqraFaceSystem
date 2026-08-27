@@ -1,0 +1,72 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Databases and logs
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.log
+
+# Biometric images, face encodings, and generated outputs
+data/private/
+app/face_ai/images/
+app/face_ai/id_folder/*
+!app/face_ai/id_folder/.gitkeep
+app/face_ai/do/*
+!app/face_ai/do/.gitkeep
+app/_Output/**
+!app/_Output/_Cam/
+!app/_Output/_Do/
+!app/_Output/_Known/
+!app/_Output/_Unknown/
+!app/_Output/_Cam/.gitkeep
+!app/_Output/_Do/.gitkeep
+!app/_Output/_Known/.gitkeep
+!app/_Output/_Unknown/.gitkeep
+app/csv.error.log
+
+# Models, datasets, archives, and installers
+*.h5
+*.onnx
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.parquet
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.exe
+*.msi
+*.whl
+
+# Build and packaging output
+build/
+dist/
+*.egg-info/
